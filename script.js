@@ -877,92 +877,76 @@ const productCache = {
 };
 function finalizePurchase(event) {
     event.preventDefault();
-    
-    // Verificar se usuário está logado
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
+
+    const token = localStorage.getItem('authToken');
+    if (!token) {
         alert('Você precisa estar logado para finalizar a compra!');
         showAccount();
         return;
     }
-    
-    // Obter dados do formulário
+
     const form = event.target;
-    const nome = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const telefone = form.querySelector('input[type="tel"]').value;
-    const endereco = form.querySelectorAll('input[type="text"]')[1].value;
-    const cidade = form.querySelectorAll('input[type="text"]')[2].value;
-    const pagamento = form.querySelector('select').value;
-    
-    // Obter informações do produto atual
     const productId = parseInt(localStorage.getItem('currentProductId'));
     let product = currentProduct || lojaProducts.find(p => p.id === productId);
-    
+
     if (!product) {
         alert('Erro ao processar pedido. Produto não encontrado.');
         return;
     }
-    
-    // Criar objeto do pedido
-    const orderNumber = generateOrderNumber();
-    const orderDate = new Date().toLocaleString('pt-BR');
-    const frete = 15.00;
-    const total = product.price + frete;
-    
-    const newOrder = {
-        orderNumber: orderNumber,
-        productId: product.id,
-        productName: product.name,
-        price: product.price,
-        frete: frete,
-        total: total,
-        date: orderDate,
-        status: 'pending',
-        customerInfo: {
-            nome: nome,
-            email: email,
-            telefone: telefone,
-            endereco: endereco,
-            cidade: cidade,
-            pagamento: pagamento
+
+    const orderData = {
+        product: {
+            name: product.name,
+            price: `MZN ${product.price.toFixed(2)}`
         },
-        trackingUpdates: [
-            {
-                date: orderDate,
-                status: 'Pedido Recebido',
-                description: 'Seu pedido foi recebido e está sendo processado.'
-            }
-        ]
+        total: product.price,
+        customerInfo: {
+            name: form.querySelector('input[type="text"]').value,
+            email: form.querySelector('input[type="email"]').value,
+            phone: form.querySelector('input[type="tel"]').value,
+            address: form.querySelectorAll('input[type="text"]')[1]?.value || '',
+            city: form.querySelectorAll('input[type="text"]')[2]?.value || '',
+            paymentMethod: form.querySelector('select').value
+        }
     };
-    
-    // Salvar pedido no histórico do usuário
-    if (!currentUser.orders) {
-        currentUser.orders = [];
-    }
-    currentUser.orders.unshift(newOrder);
-    
-    // Manter compatibilidade com histórico antigo
-    if (!currentUser.history) {
-        currentUser.history = [];
-    }
-    currentUser.history.unshift({
-        productName: product.name,
-        price: total,
-        date: orderDate
+
+    const apiUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:8888/.netlify/functions'
+        : `${window.location.origin}/.netlify/functions`;
+
+    const btn = form.querySelector('[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Processando...'; }
+
+    fetch(`${apiUrl}/create-order`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) throw new Error(data.error);
+        // Enviar WhatsApp se existir a função
+        if (typeof sendWhatsAppMessage === 'function') {
+            const fakeOrder = { orderNumber: String(data.orderId).slice(-8).toUpperCase(), productName: product.name, price: product.price, frete: 0, total: product.price, customerInfo: { nome: orderData.customerInfo.name, email: orderData.customerInfo.email, telefone: orderData.customerInfo.phone, endereco: orderData.customerInfo.address, cidade: orderData.customerInfo.city, pagamento: orderData.customerInfo.paymentMethod } };
+            sendWhatsAppMessage(fakeOrder, product);
+        } else {
+            showOrderConfirmationSimple(product, orderData);
+        }
+    })
+    .catch(err => {
+        if (btn) { btn.disabled = false; btn.textContent = 'Finalizar Pagamento'; }
+        alert('Erro ao realizar pedido: ' + err.message);
     });
-    
-    // Salvar no localStorage
-    const users = getUsers().map(u => u.email === currentUser.email ? currentUser : u);
-    localStorage.setItem('users', JSON.stringify(users));
-    setCurrentUser(currentUser);
-    
-    // Enviar mensagem para WhatsApp
-    sendWhatsAppMessage(newOrder, product);
-    
-    // Mostrar confirmação
-    showOrderConfirmation(newOrder);
 }
+
+function showOrderConfirmationSimple(product, orderData) {
+    alert(`✅ Pedido realizado com sucesso!\n\nProduto: ${product.name}\nValor: MZN ${product.price.toFixed(2)}\nPagamento: ${orderData.customerInfo.paymentMethod}\n\nEntraremos em contacto quando o produto chegar a Moçambique!`);
+    showHome();
+}
+
 
 // Função para gerar número de pedido
 function generateOrderNumber() {
@@ -1168,10 +1152,13 @@ function showRegisterSection() {
 }
 
 function logout() {
-    localStorage.removeItem('currentUser');
-    showLoginSection();
-    updateAccountMenu();
-    alert('Você saiu da sua conta!');
+    if (confirm('Deseja realmente sair?')) {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('user');
+        localStorage.removeItem('authToken');
+        showLoginSection();
+        updateAccountMenu();
+    }
 }
 // LOCALIZE AS FUNÇÕES showOrders() e showSettings() 
 // (por volta da linha 918-924) e SUBSTITUA por este código:
@@ -1181,96 +1168,7 @@ function logout() {
 
 // SUBSTITUA a função finalizePurchase (linha 808) por esta versão:
 
-function finalizePurchase(event) {
-    event.preventDefault();
-    
-    // Verificar se usuário está logado
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-        alert('Você precisa estar logado para finalizar a compra!');
-        showAccount();
-        return;
-    }
-    
-    // Obter dados do formulário
-    const form = event.target;
-    const nome = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const telefone = form.querySelector('input[type="tel"]').value;
-    const endereco = form.querySelectorAll('input[type="text"]')[1].value;
-    const cidade = form.querySelectorAll('input[type="text"]')[2].value;
-    const pagamento = form.querySelector('select').value;
-    
-    // Obter informações do produto atual
-    const productId = parseInt(localStorage.getItem('currentProductId'));
-    let product = currentProduct || lojaProducts.find(p => p.id === productId);
-    
-    if (!product) {
-        alert('Erro ao processar pedido. Produto não encontrado.');
-        return;
-    }
-    
-    // Criar objeto do pedido
-    const orderNumber = generateOrderNumber();
-    const orderDate = new Date().toLocaleString('pt-BR');
-    const frete = 15.00;
-    const total = product.price + frete;
-    
-    const newOrder = {
-        orderNumber: orderNumber,
-        productId: product.id,
-        productName: product.name,
-        price: product.price,
-        frete: frete,
-        total: total,
-        date: orderDate,
-        status: 'pending', // pending, processing, shipped, delivered
-        customerInfo: {
-            nome: nome,
-            email: email,
-            telefone: telefone,
-            endereco: endereco,
-            cidade: cidade,
-            pagamento: pagamento
-        },
-        trackingUpdates: [
-            {
-                date: orderDate,
-                status: 'Pedido Recebido',
-                description: 'Seu pedido foi recebido e está sendo processado.'
-            }
-        ]
-    };
-    
-    // Salvar pedido no histórico do usuário
-    if (!currentUser.orders) {
-        currentUser.orders = [];
-    }
-    currentUser.orders.unshift(newOrder);
-    
-    // Manter compatibilidade com histórico antigo
-    if (!currentUser.history) {
-        currentUser.history = [];
-    }
-    currentUser.history.unshift({
-        productName: product.name,
-        price: total,
-        date: orderDate
-    });
-    
-    // Salvar no localStorage
-    const users = getUsers().map(u => u.email === currentUser.email ? currentUser : u);
-    localStorage.setItem('users', JSON.stringify(users));
-    setCurrentUser(currentUser);
-    
-    // Enviar mensagem para WhatsApp
-    sendWhatsAppMessage(newOrder, product);
-    
-    // Mostrar confirmação
-    showOrderConfirmation(newOrder);
-}
 
-// Função para gerar número de pedido
 function generateOrderNumber() {
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 1000);
@@ -1391,12 +1289,14 @@ function showOrderConfirmation(order) {
 // FUNÇÃO MEUS PEDIDOS COM STATUS
 // ============================================
 function showOrders() {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
         alert('Faça login para ver seus pedidos.');
+        showAccount();
         return;
     }
 
+    // Criar modal de pedidos
     const modal = document.createElement('div');
     modal.className = 'modal-overlay';
     modal.innerHTML = `
@@ -1406,68 +1306,75 @@ function showOrders() {
                 <button class="modal-close" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="orders-list"></div>
+                <div id="orders-list"><p style="text-align:center; padding:20px;">⏳ Carregando pedidos...</p></div>
             </div>
         </div>
     `;
     document.body.appendChild(modal);
 
-    const ordersList = document.getElementById('orders-list');
-    const orders = currentUser.orders || [];
-    
-    if (orders.length > 0) {
-        orders.forEach((order, index) => {
-            const orderCard = document.createElement('div');
-            orderCard.className = 'order-card';
-            
-            const statusInfo = getOrderStatusInfo(order.status);
-            
-            orderCard.innerHTML = `
-                <div class="order-header">
-                    <div>
-                        <div class="order-number">Pedido #${order.orderNumber}</div>
-                        <div class="order-date">${order.date}</div>
-                    </div>
-                    <span class="order-status ${statusInfo.class}">${statusInfo.icon} ${statusInfo.text}</span>
-                </div>
-                <div class="order-body">
-                    <div class="order-product">
-                        <strong>${order.productName}</strong>
-                    </div>
-                    <div class="order-price-info">
-                        <div>Produto: MZN ${order.price.toFixed(2)}</div>
-                        <div>Frete: MZN ${order.frete.toFixed(2)}</div>
-                        <div class="order-total">Total: MZN ${order.total.toFixed(2)}</div>
-                    </div>
-                </div>
-                <div class="order-footer">
-                    <button class="btn-track" onclick="showOrderTracking('${order.orderNumber}')">
-                        📍 Rastrear Pedido
-                    </button>
-                    <button class="btn-details" onclick="showOrderDetails('${order.orderNumber}')">
-                        ℹ️ Ver Detalhes
-                    </button>
-                </div>
-            `;
-            ordersList.appendChild(orderCard);
-        });
-    } else {
-        ordersList.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">📦</div>
-                <h3>Nenhum pedido ainda</h3>
-                <p>Quando você fizer compras, elas aparecerão aqui.</p>
-                <button class="btn-primary" onclick="closeModal(); showLoja();">Ir para Loja</button>
-            </div>
-        `;
-    }
+    modal.onclick = function(e) { if (e.target === modal) closeModal(); };
 
-    modal.onclick = function(e) {
-        if (e.target === modal) {
-            closeModal();
+    // Buscar pedidos da API
+    const apiUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:8888/.netlify/functions'
+        : `${window.location.origin}/.netlify/functions`;
+
+    fetch(`${apiUrl}/get-orders`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(r => r.json())
+    .then(data => {
+        const ordersList = document.getElementById('orders-list');
+        const orders = data.orders || [];
+
+        if (orders.length === 0) {
+            ordersList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📦</div>
+                    <h3>Nenhum pedido ainda</h3>
+                    <p>Quando você fizer compras, elas aparecerão aqui.</p>
+                    <button class="btn-primary" onclick="closeModal(); showLoja();">Ir para Loja</button>
+                </div>`;
+            return;
         }
-    };
+
+        const statusMap = {
+            pending:    { icon: '⏳', text: 'Pendente',    cls: 'status-pending' },
+            processing: { icon: '📦', text: 'Processando', cls: 'status-processing' },
+            shipped:    { icon: '🚚', text: 'Enviado',     cls: 'status-shipped' },
+            delivered:  { icon: '✅', text: 'Entregue',    cls: 'status-delivered' },
+            cancelled:  { icon: '❌', text: 'Cancelado',   cls: 'status-cancelled' }
+        };
+
+        ordersList.innerHTML = orders.map(order => {
+            const s = statusMap[order.status] || { icon: '📋', text: order.status, cls: '' };
+            const date = new Date(order.createdAt).toLocaleDateString('pt-BR');
+            const total = typeof order.total === 'number' ? `MZN ${order.total.toFixed(2)}` : order.total;
+            return `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-number">Pedido #${String(order._id).slice(-8).toUpperCase()}</div>
+                            <div class="order-date">${date}</div>
+                        </div>
+                        <span class="order-status ${s.cls}">${s.icon} ${s.text}</span>
+                    </div>
+                    <div class="order-body">
+                        <div class="order-product"><strong>${order.product?.name || 'Produto'}</strong></div>
+                        <div class="order-price-info">
+                            <div class="order-total">Total: ${total}</div>
+                        </div>
+                    </div>
+                </div>`;
+        }).join('');
+    })
+    .catch(err => {
+        const ordersList = document.getElementById('orders-list');
+        ordersList.innerHTML = '<p style="color:red; padding:20px; text-align:center;">❌ Erro ao carregar pedidos. Tente novamente.</p>';
+        console.error('Erro pedidos:', err);
+    });
 }
+
 
 function getOrderStatusInfo(status) {
     const statusMap = {
@@ -1855,11 +1762,15 @@ function findUser(email, password) {
 }
 
 function getCurrentUser() {
+    // Lê do novo sistema (auth-integration.js) primeiro, depois do antigo
+    const newUser = localStorage.getItem('user');
+    if (newUser) return JSON.parse(newUser);
     return JSON.parse(localStorage.getItem('currentUser') || 'null');
 }
 
 function setCurrentUser(user) {
     localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
 }
 
 //function logout() {
