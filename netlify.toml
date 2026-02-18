@@ -1,0 +1,39 @@
+# netlify.toml - Configuração do Netlify
+
+[build]
+  publish = "."
+  command = "echo 'Build complete'"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Redireciona todas as rotas para index.html (SPA)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Garante que as functions não sejam redirecionadas
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+# Headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# ====================================================================
+# VARIÁVEIS DE AMBIENTE - Configure no painel do Netlify:
+#   Site Settings > Environment Variables
+#
+#   MONGODB_URI  = mongodb+srv://user:password@cluster.mongodb.net/minhaloja?retryWrites=true&w=majority
+#   JWT_SECRET   = uma-senha-muito-longa-e-aleatoria-aqui-mude-isso
+# ====================================================================

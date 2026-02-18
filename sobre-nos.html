@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - BazaraMz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-page {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+        .info-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(102,126,234,0.35);
+        }
+        .info-hero h1 { font-size: 42px; margin-bottom: 12px; }
+        .info-hero p  { font-size: 18px; opacity: 0.9; }
+        .card-section {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border-left: 5px solid #667eea;
+        }
+        .card-section h2 {
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-section p, .card-section li {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        .card-section ul { padding-left: 22px; }
+        .card-section li { margin-bottom: 8px; }
+        .address-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(245,87,108,0.3);
+        }
+        .address-box h2 { font-size: 24px; margin-bottom: 14px; }
+        .address-box p  { font-size: 16px; line-height: 1.8; opacity: 0.95; }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .value-item {
+            text-align: center;
+            background: #f7f8ff;
+            border-radius: 12px;
+            padding: 25px 15px;
+            border: 2px solid #e8ecff;
+        }
+        .value-item .icon { font-size: 36px; margin-bottom: 10px; }
+        .value-item h3 { color: #667eea; font-size: 16px; margin-bottom: 6px; }
+        .value-item p  { color: #777; font-size: 14px; }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-back:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .whatsapp-cta {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .whatsapp-cta h3 { font-size: 22px; margin-bottom: 10px; }
+        .whatsapp-cta p  { opacity: 0.95; margin-bottom: 18px; }
+        .btn-whatsapp {
+            display: inline-block;
+            background: white;
+            color: #11998e;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🛍️ BazaraMz</div>
+            <div class="main-nav">
+                <a href="index.html">Início</a>
+                <a href="index.html">Loja</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="info-page">
+        <a href="index.html" class="btn-back">← Voltar à Loja</a>
+
+        <div class="info-hero">
+            <h1>🏠 Sobre Nós</h1>
+            <p>Somos a sua loja de confiança em Moçambique</p>
+        </div>
+
+        <div class="card-section">
+            <h2>💡 Quem Somos</h2>
+            <p>Somos uma empresa moçambicana especializada na importação e venda de produtos de qualidade, diretamente da China para Moçambique. Trabalhamos para trazer os melhores produtos a preços acessíveis, com comodidade e segurança para os nossos clientes.</p>
+            <p style="margin-top:12px;">A nossa missão é simples: <strong>ligar os moçambicanos a produtos de qualidade internacional</strong>, sem sair de casa.</p>
+        </div>
+
+        <div class="card-section">
+            <h2>📦 Como Funciona</h2>
+            <ul>
+                <li>Você escolhe o produto no nosso site e faz o pedido</li>
+                <li>O produto é encomendado diretamente dos nossos fornecedores na China</li>
+                <li>Fazemos a importação e o acompanhamento da encomenda</li>
+                <li>Assim que o produto chegar a Moçambique, <strong>entramos em contacto consigo</strong></li>
+                <li>Você levanta o produto no nosso espaço físico em Maputo</li>
+            </ul>
+        </div>
+
+        <div class="address-box">
+            <h2>📍 Onde Nos Encontrar</h2>
+            <p><strong>1º Andar, Prédio Bombas Êxito</strong><br>
+            Av. Vladimir Lenine, esquina com Av. Ahmed Sekou Touré<br>
+            Maputo, Moçambique</p>
+            <p style="margin-top: 14px;">🕐 Segunda a Sexta: 9h – 18h</p>
+        </div>
+
+        <div class="card-section">
+            <h2>⭐ Os Nossos Valores</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="icon">🤝</div>
+                    <h3>Confiança</h3>
+                    <p>Transparência em cada passo da encomenda</p>
+                </div>
+                <div class="value-item">
+                    <div class="icon">🔒</div>
+                    <h3>Segurança</h3>
+                    <p>Pagamento seguro e produto garantido</p>
+                </div>
+                <div class="value-item">
+                    <div class="icon">🚀</div>
+                    <h3>Agilidade</h3>
+                    <p>Importação rápida e comunicação eficiente</p>
+                </div>
+                <div class="value-item">
+                    <div class="icon">💰</div>
+                    <h3>Preço Justo</h3>
+                    <p>Directamente da China para si</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="whatsapp-cta">
+            <h3>💬 Fale Connosco Directamente</h3>
+            <p>Tem alguma dúvida ou quer fazer uma encomenda especial? Entre em contacto pelo WhatsApp!</p>
+            <a href="https://wa.me/258XXXXXXXXX" target="_blank" class="btn-whatsapp">💬 Abrir WhatsApp</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 BazaraMz. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

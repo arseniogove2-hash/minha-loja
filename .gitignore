@@ -1,0 +1,21 @@
+# Dependências
+node_modules/
+.npm
+
+# Netlify
+.netlify/
+
+# Variáveis de ambiente - NUNCA commitar!
+.env
+.env.local
+.env.*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor
+.vscode/
+.idea/
+*.swp

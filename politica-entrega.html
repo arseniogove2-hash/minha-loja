@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Entrega - BazaraMz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-page { max-width: 900px; margin: 40px auto; padding: 0 20px 60px; }
+        .info-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; text-align: center; padding: 60px 30px;
+            border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(102,126,234,0.35);
+        }
+        .info-hero h1 { font-size: 42px; margin-bottom: 12px; }
+        .info-hero p  { font-size: 18px; opacity: 0.9; }
+        .card-section {
+            background: white; border-radius: 16px; padding: 35px;
+            margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border-left: 5px solid #667eea;
+        }
+        .card-section h2 {
+            font-size: 24px; color: #2d3748; margin-bottom: 14px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .card-section p, .card-section li { color: #555; line-height: 1.8; font-size: 16px; }
+        .card-section ul { padding-left: 22px; }
+        .card-section li { margin-bottom: 8px; }
+        .timeline {
+            display: flex; flex-direction: column; gap: 0;
+            margin-top: 10px; position: relative;
+        }
+        .timeline-item {
+            display: flex; gap: 20px; align-items: flex-start;
+            padding: 18px 0; position: relative;
+        }
+        .timeline-item:not(:last-child)::after {
+            content: ''; position: absolute; left: 19px; top: 50px;
+            width: 2px; height: calc(100% - 20px); background: #e2e8f0;
+        }
+        .step-num {
+            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px; z-index: 1;
+        }
+        .step-info h3 { color: #2d3748; font-size: 17px; margin-bottom: 4px; }
+        .step-info p  { color: #718096; font-size: 15px; line-height: 1.6; }
+        .prazo-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;
+        }
+        .prazo-card {
+            border-radius: 14px; padding: 25px; text-align: center;
+        }
+        .prazo-card.pequeno {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+        }
+        .prazo-card.grande {
+            background: linear-gradient(135deg, #f093fb, #f5576c); color: white;
+        }
+        .prazo-card .dias { font-size: 52px; font-weight: 900; line-height: 1; }
+        .prazo-card .label { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+        .prazo-card .tipo { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .notice-box {
+            background: #fff8e1; border: 2px solid #ffc107;
+            border-radius: 12px; padding: 20px; margin-top: 20px;
+        }
+        .notice-box p { color: #7c5700; font-size: 15px; line-height: 1.7; }
+        .taxa-table-wrap {
+            overflow-x: auto; margin-top: 18px; border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .taxa-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+        .taxa-table thead tr {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+        }
+        .taxa-table th { padding: 14px 18px; text-align: left; font-weight: 700; }
+        .taxa-table td {
+            padding: 12px 18px; border-bottom: 1px solid #e8ecff;
+            color: #444; vertical-align: middle;
+        }
+        .taxa-table .cat-first {
+            background: #f7f8ff; font-weight: 700;
+            color: #2d3748; font-size: 14px; line-height: 1.5;
+        }
+        .taxa-table small { font-weight: 400; color: #888; display: block; }
+        .taxa-table .price-cell {
+            font-weight: 800; color: #667eea; font-size: 16px; white-space: nowrap;
+        }
+        .taxa-table tbody tr:hover { background: #f7f8ff; }
+        .address-highlight {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white; border-radius: 16px; padding: 30px;
+            margin-bottom: 25px; box-shadow: 0 4px 20px rgba(17,153,142,0.3);
+        }
+        .address-highlight h2 { font-size: 24px; margin-bottom: 12px; }
+        .address-highlight p  { font-size: 16px; line-height: 1.8; opacity: 0.95; }
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            padding: 12px 24px; border-radius: 30px; text-decoration: none;
+            font-weight: 600; font-size: 15px; margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-back:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        @media (max-width: 600px) {
+            .prazo-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🛍️ BazaraMz</div>
+            <div class="main-nav">
+                <a href="index.html">Início</a>
+                <a href="index.html">Loja</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="info-page">
+        <a href="index.html" class="btn-back">← Voltar à Loja</a>
+
+        <div class="info-hero">
+            <h1>📦 Política de Entrega</h1>
+            <p>Tudo o que precisa saber sobre prazos e levantamento</p>
+        </div>
+
+        <div class="card-section">
+            <h2>⏱️ Prazos de Entrega</h2>
+            <p>Os nossos produtos são importados directamente da China. Os prazos variam conforme o tamanho do produto:</p>
+            <div class="prazo-grid">
+                <div class="prazo-card pequeno">
+                    <div class="tipo">📱 Produtos Pequenos</div>
+                    <div class="dias">15</div>
+                    <div class="label">dias úteis após confirmação</div>
+                </div>
+                <div class="prazo-card grande">
+                    <div class="tipo">📦 Produtos Grandes</div>
+                    <div class="dias">30</div>
+                    <div class="label">dias úteis após confirmação</div>
+                </div>
+            </div>
+            <div class="notice-box">
+                <p>⚠️ <strong>Nota importante:</strong> Os prazos indicados são estimativas. Factores como alfândega, transporte internacional e volume de encomendas podem influenciar o tempo de chegada. Mantemos sempre o cliente informado sobre o estado da sua encomenda.</p>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <h2>🔄 Como Funciona o Processo</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="step-num">1</div>
+                    <div class="step-info">
+                        <h3>Faz o Pedido</h3>
+                        <p>Escolhe o produto no site e finaliza a encomenda. O pagamento do produto é feito via M-Pesa ou BIM antes do envio.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="step-num">2</div>
+                    <div class="step-info">
+                        <h3>Confirmação da Encomenda</h3>
+                        <p>Recebe confirmação do seu pedido e o produto é encomendado ao nosso fornecedor na China.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="step-num">3</div>
+                    <div class="step-info">
+                        <h3>Produto a Caminho</h3>
+                        <p>O produto é enviado da China para Moçambique. Acompanhamos o envio de perto.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="step-num">4</div>
+                    <div class="step-info">
+                        <h3>Chegada a Moçambique</h3>
+                        <p><strong>Entramos em contacto consigo</strong> assim que o produto chegar a Moçambique para agendar o levantamento.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="step-num">5</div>
+                    <div class="step-info">
+                        <h3>Levantamento do Produto</h3>
+                        <p>Dirige-se ao nosso espaço em Maputo e levanta o seu produto. Simples e rápido!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <h2>💰 Taxa de Envio — Paga no Levantamento</h2>
+            <p>O preço do produto que vê no site <strong>não inclui a taxa de envio</strong>. Esta taxa é paga <strong>no momento do levantamento</strong> e varia conforme o tipo e tamanho do produto, conforme a tabela abaixo:</p>
+
+            <div class="taxa-table-wrap">
+                <table class="taxa-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Item</th>
+                            <th>Taxa de Envio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cat-first">
+                            <td rowspan="5">📦 Diversos<br><small>por KG</small></td>
+                            <td>Cabelos</td>
+                            <td rowspan="5" class="price-cell">1 450 MZN</td>
+                        </tr>
+                        <tr><td>Roupas</td></tr>
+                        <tr><td>Calçados</td></tr>
+                        <tr><td>Bijuterias</td></tr>
+                        <tr><td>Acessórios</td></tr>
+
+                        <tr class="cat-first">
+                            <td rowspan="2">📷 Câmeras Fotográficas<br><small>por Unidade</small></td>
+                            <td>Grandes</td>
+                            <td class="price-cell">3 000 MZN</td>
+                        </tr>
+                        <tr>
+                            <td>Pequenas</td>
+                            <td class="price-cell">2 500 MZN</td>
+                        </tr>
+
+                        <tr class="cat-first">
+                            <td rowspan="6">🔋 Materiais com Baterias<br><small>por Unidade</small></td>
+                            <td>Celulares</td>
+                            <td class="price-cell">2 500 MZN</td>
+                        </tr>
+                        <tr><td>Tablets</td><td class="price-cell">2 000 MZN</td></tr>
+                        <tr><td>Computadores 14"</td><td class="price-cell">3 000 MZN</td></tr>
+                        <tr><td>Computadores 15,6"</td><td class="price-cell">3 500 MZN</td></tr>
+                        <tr><td>Gamers (por KG)</td><td class="price-cell">1 450 MZN</td></tr>
+                        <tr><td>Relógios</td><td class="price-cell">1 500 MZN</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="notice-box" style="margin-top:20px;">
+                <p>💬 <strong>Dúvidas sobre a taxa do seu produto?</strong> Contacte-nos pelo WhatsApp antes de encomendar e informamos o valor exacto para o seu produto.</p>
+            </div>
+        </div>
+
+        <div class="address-highlight">
+            <h2>📍 Local de Levantamento</h2>
+            <p>
+                <strong>1º Andar, Prédio Bombas Êxito</strong><br>
+                Av. Vladimir Lenine, esquina com Av. Ahmed Sekou Touré<br>
+                Maputo, Moçambique<br><br>
+                🕐 <strong>Horário:</strong> Segunda a Sexta, 9h – 18h
+            </p>
+        </div>
+
+        <div class="card-section">
+            <h2>❓ Perguntas Frequentes sobre Entrega</h2>
+            <ul>
+                <li><strong>Fazem entrega ao domicílio?</strong> — Por enquanto não. O levantamento é feito no nosso espaço em Maputo.</li>
+                <li><strong>O que acontece se o prazo atrasar?</strong> — Entramos em contacto para informar e apresentar uma solução.</li>
+                <li><strong>Posso acompanhar o meu pedido?</strong> — Sim! Contacte-nos via WhatsApp com o seu número de pedido.</li>
+                <li><strong>O que acontece se o produto chegar danificado?</strong> — Analisamos o caso e encontramos a melhor solução para si.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 BazaraMz. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

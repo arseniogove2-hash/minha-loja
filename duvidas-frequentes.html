@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dúvidas Frequentes - BazaraMz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-page { max-width: 900px; margin: 40px auto; padding: 0 20px 60px; }
+        .info-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; text-align: center; padding: 60px 30px;
+            border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(102,126,234,0.35);
+        }
+        .info-hero h1 { font-size: 42px; margin-bottom: 12px; }
+        .info-hero p  { font-size: 18px; opacity: 0.9; }
+        .faq-category {
+            background: white; border-radius: 16px; padding: 30px 35px;
+            margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+        }
+        .faq-category h2 {
+            font-size: 20px; color: #667eea; margin-bottom: 20px;
+            padding-bottom: 12px; border-bottom: 2px solid #e8ecff;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .faq-item {
+            border: 1px solid #e2e8f0; border-radius: 12px;
+            margin-bottom: 12px; overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .faq-item:hover { box-shadow: 0 4px 15px rgba(102,126,234,0.12); }
+        .faq-question {
+            padding: 18px 20px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #fafbff; font-weight: 600; color: #2d3748;
+            font-size: 15px; user-select: none;
+            transition: background 0.2s;
+        }
+        .faq-question:hover { background: #f0f3ff; }
+        .faq-question.open { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .faq-toggle { font-size: 20px; font-weight: 400; transition: transform 0.3s; }
+        .faq-question.open .faq-toggle { transform: rotate(45deg); }
+        .faq-answer {
+            display: none; padding: 18px 20px;
+            color: #555; font-size: 15px; line-height: 1.8;
+            border-top: 1px solid #e2e8f0; background: white;
+        }
+        .faq-answer.open { display: block; }
+        .faq-answer strong { color: #333; }
+        .faq-answer a { color: #667eea; text-decoration: none; font-weight: 600; }
+        .faq-answer a:hover { text-decoration: underline; }
+        .cta-box {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white; border-radius: 16px; padding: 35px;
+            text-align: center; margin-top: 10px;
+        }
+        .cta-box h2 { font-size: 24px; margin-bottom: 10px; }
+        .cta-box p  { font-size: 16px; opacity: 0.95; margin-bottom: 20px; }
+        .btn-whatsapp {
+            display: inline-block; background: white;
+            color: #f5576c; padding: 14px 32px; border-radius: 30px;
+            font-weight: 700; text-decoration: none; font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            padding: 12px 24px; border-radius: 30px; text-decoration: none;
+            font-weight: 600; font-size: 15px; margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-back:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🛍️ BazaraMz</div>
+            <div class="main-nav">
+                <a href="index.html">Início</a>
+                <a href="index.html">Loja</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="info-page">
+        <a href="index.html" class="btn-back">← Voltar à Loja</a>
+
+        <div class="info-hero">
+            <h1>❓ Dúvidas Frequentes</h1>
+            <p>As respostas às perguntas mais comuns dos nossos clientes</p>
+        </div>
+
+        <!-- ENCOMENDAS -->
+        <div class="faq-category">
+            <h2>🛒 Encomendas</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como faço uma encomenda?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    É simples! Navegue pelos nossos produtos, clique em <strong>"Ver Detalhes"</strong> no produto que pretende, depois em <strong>"Comprar Agora"</strong>. Preencha os seus dados e escolha a forma de pagamento. A sua encomenda estará registada e entraremos em contacto.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Posso encomendar mais do que um produto ao mesmo tempo?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Pode fazer múltiplos pedidos. Para encomendas de vários produtos de uma vez, recomendamos entrar em contacto directo pelo <strong>WhatsApp</strong> para podermos agrupar a encomenda e oferecer melhores condições.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Posso cancelar ou alterar a minha encomenda?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    O cancelamento ou alteração é possível <strong>antes de o produto ser enviado da China</strong>. Após o envio, não é possível cancelar. Para o fazer, contacte-nos o mais rápido possível pelo WhatsApp com o número do seu pedido.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como sei que o meu pedido foi confirmado?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Após efectuar o pagamento e enviar o comprovativo via WhatsApp, receberá uma confirmação da nossa parte. Pode também verificar o estado do seu pedido fazendo login na sua conta no site.
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGAMENTOS -->
+        <div class="faq-category">
+            <h2>💳 Pagamentos</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Quais são as formas de pagamento aceites?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Aceitamos <strong>M-Pesa</strong> (Vodacom) e <strong>Millennium BIM</strong> (transferência bancária). Após finalizar o seu pedido, receberá os dados para efectuar o pagamento. Consulte a nossa página de <a href="formas-pagamento.html">Formas de Pagamento</a> para mais detalhes.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    O pagamento é feito antes ou depois de receber o produto?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    O pagamento é feito <strong>antes do envio</strong> da encomenda, pois os produtos são importados diretamente da China por encomenda. Isto garante que o seu produto é reservado e enviado especificamente para si.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como envio o comprovativo de pagamento?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Tire uma screenshot ou foto do comprovativo de pagamento (M-Pesa ou BIM) e envie diretamente para o nosso <strong>WhatsApp</strong>. Inclua o número do seu pedido na mensagem para agilizarmos a confirmação.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    E se eu fizer um pagamento errado?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Contacte-nos imediatamente pelo WhatsApp com o comprovativo do pagamento e explicação do erro. Analisamos cada caso individualmente e encontramos sempre a melhor solução para o cliente.
+                </div>
+            </div>
+        </div>
+
+        <!-- ENTREGA -->
+        <div class="faq-category">
+            <h2>📦 Entrega & Levantamento</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Quanto tempo demora a chegar o meu produto?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Os produtos pequenos demoram aproximadamente <strong>15 dias</strong> e os produtos grandes cerca de <strong>30 dias</strong>, contados a partir da confirmação do pagamento. Os produtos são enviados directamente da China para Moçambique.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Fazem entrega ao domicílio?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Por enquanto, o levantamento é feito <strong>presencialmente</strong> no nosso espaço: <br><strong>1º Andar, Prédio Bombas Êxito, Av. Vladimir Lenine esquina com Av. Ahmed Sekou Touré, Maputo.</strong><br>Estamos a trabalhar para oferecer entrega ao domicílio no futuro.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como saberei quando o meu produto chegou?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <strong>Entramos em contacto consigo assim que o produto chegar a Moçambique.</strong> Receberá uma mensagem (WhatsApp ou chamada) a informar que pode vir levantar o seu produto.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    O produto pode chegar danificado?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Tomamos todos os cuidados para garantir que os produtos chegam em perfeito estado. Se porventura o produto chegar danificado, contacte-nos imediatamente com fotos do produto e da embalagem. Analisamos o caso e apresentamos a melhor solução.
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUTOS -->
+        <div class="faq-category">
+            <h2>🛍️ Produtos</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Os produtos são originais?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Trabalhamos com fornecedores verificados na China. As descrições e especificações de cada produto estão disponíveis na página do produto. Em caso de dúvida sobre um produto específico, contacte-nos antes de comprar.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Posso encomendar um produto que não está no site?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Sim! Temos acesso a uma vasta gama de produtos. Contacte-nos pelo <strong>WhatsApp</strong> com a descrição ou imagem do produto que procura e verificamos a disponibilidade e preço para si.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Os preços incluem taxas e impostos?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Os preços apresentados no site são o <strong>custo do produto</strong>. Para além do produto, é cobrada uma <strong>taxa de envio no momento do levantamento</strong>. A taxa varia conforme o tipo e peso do produto — consulte a nossa <a href="politica-entrega.html">Tabela de Taxas de Envio</a> ou contacte-nos pelo WhatsApp para saber o valor exacto antes de encomendar.
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2>💬 A sua dúvida não está aqui?</h2>
+            <p>Fale connosco directamente pelo WhatsApp! Respondemos rapidamente e com todo o gosto.</p>
+            <a href="https://wa.me/258XXXXXXXXX" target="_blank" class="btn-whatsapp">💬 Falar no WhatsApp</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 BazaraMz. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(el) {
+            const answer = el.nextElementSibling;
+            const isOpen = el.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-question.open').forEach(q => {
+                q.classList.remove('open');
+                q.nextElementSibling.classList.remove('open');
+            });
+
+            // Open clicked if it was closed
+            if (!isOpen) {
+                el.classList.add('open');
+                answer.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>

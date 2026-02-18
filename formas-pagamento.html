@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pagamento - BazaraMz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-page { max-width: 900px; margin: 40px auto; padding: 0 20px 60px; }
+        .info-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; text-align: center; padding: 60px 30px;
+            border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(102,126,234,0.35);
+        }
+        .info-hero h1 { font-size: 42px; margin-bottom: 12px; }
+        .info-hero p  { font-size: 18px; opacity: 0.9; }
+        .payment-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px;
+        }
+        .payment-card {
+            border-radius: 20px; padding: 35px; color: white;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15); position: relative; overflow: hidden;
+        }
+        .payment-card::before {
+            content: ''; position: absolute; top: -30px; right: -30px;
+            width: 120px; height: 120px; border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        .payment-card.mpesa  { background: linear-gradient(135deg, #e80b0b, #ff5722); }
+        .payment-card.bim    { background: linear-gradient(135deg, #1565c0, #0d47a1); }
+        .payment-card .pay-icon { font-size: 52px; margin-bottom: 15px; }
+        .payment-card h2 { font-size: 26px; margin-bottom: 8px; }
+        .payment-card .pay-tag {
+            display: inline-block; background: rgba(255,255,255,0.25);
+            padding: 4px 12px; border-radius: 20px; font-size: 13px; margin-bottom: 14px;
+        }
+        .payment-card ul { list-style: none; padding: 0; }
+        .payment-card li { font-size: 15px; padding: 5px 0; opacity: 0.95; }
+        .payment-card li::before { content: '✓ '; font-weight: 700; }
+        .card-section {
+            background: white; border-radius: 16px; padding: 35px;
+            margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border-left: 5px solid #667eea;
+        }
+        .card-section h2 {
+            font-size: 24px; color: #2d3748; margin-bottom: 18px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .steps-list { list-style: none; padding: 0; }
+        .steps-list li {
+            display: flex; gap: 15px; align-items: flex-start;
+            padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+        }
+        .steps-list li:last-child { border-bottom: none; }
+        .step-badge {
+            width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center;
+            justify-content: center; font-weight: 700; font-size: 14px;
+        }
+        .step-text { color: #555; line-height: 1.7; font-size: 15px; padding-top: 4px; }
+        .step-text strong { color: #333; }
+        .security-box {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white; border-radius: 16px; padding: 30px; text-align: center;
+            margin-bottom: 25px;
+        }
+        .security-box h2 { font-size: 22px; margin-bottom: 10px; }
+        .security-box p  { font-size: 15px; opacity: 0.95; line-height: 1.7; }
+        .security-icons {
+            display: flex; justify-content: center; gap: 30px; margin-top: 18px; flex-wrap: wrap;
+        }
+        .sec-item { text-align: center; }
+        .sec-item .icon { font-size: 32px; }
+        .sec-item p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+        .notice-box {
+            background: #fff8e1; border: 2px solid #ffc107;
+            border-radius: 12px; padding: 20px;
+        }
+        .notice-box p { color: #7c5700; font-size: 15px; line-height: 1.7; }
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            padding: 12px 24px; border-radius: 30px; text-decoration: none;
+            font-weight: 600; font-size: 15px; margin-bottom: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-back:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        @media (max-width: 600px) {
+            .payment-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🛍️ BazaraMz</div>
+            <div class="main-nav">
+                <a href="index.html">Início</a>
+                <a href="index.html">Loja</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="info-page">
+        <a href="index.html" class="btn-back">← Voltar à Loja</a>
+
+        <div class="info-hero">
+            <h1>💳 Formas de Pagamento</h1>
+            <p>Pagamento simples, rápido e seguro</p>
+        </div>
+
+        <div class="payment-grid">
+            <div class="payment-card mpesa">
+                <div class="pay-icon">📱</div>
+                <h2>M-Pesa</h2>
+                <span class="pay-tag">Vodacom Moçambique</span>
+                <ul>
+                    <li>Pagamento directo pelo telemóvel</li>
+                    <li>Disponível 24 horas por dia</li>
+                    <li>Confirmação imediata</li>
+                    <li>Sem necessidade de conta bancária</li>
+                </ul>
+            </div>
+            <div class="payment-card bim">
+                <div class="pay-icon">🏦</div>
+                <h2>Millennium BIM</h2>
+                <span class="pay-tag">Transferência Bancária</span>
+                <ul>
+                    <li>Transferência bancária</li>
+                    <li>Via app mBIM</li>
+                    <li>Via internet banking</li>
+                    <li>Confirmação em até 24h</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <h2>🔄 Como Pagar com M-Pesa</h2>
+            <ul class="steps-list">
+                <li>
+                    <span class="step-badge">1</span>
+                    <span class="step-text">Selecione o produto que deseja e clique em <strong>"Comprar Agora"</strong></span>
+                </li>
+                <li>
+                    <span class="step-badge">2</span>
+                    <span class="step-text">Preencha os seus dados no formulário de checkout</span>
+                </li>
+                <li>
+                    <span class="step-badge">3</span>
+                    <span class="step-text">Escolha <strong>"M-Pesa"</strong> como forma de pagamento</span>
+                </li>
+                <li>
+                    <span class="step-badge">4</span>
+                    <span class="step-text">Receberá o nosso número M-Pesa e o valor a transferir</span>
+                </li>
+                <li>
+                    <span class="step-badge">5</span>
+                    <span class="step-text">Após o pagamento, envie o comprovativo via <strong>WhatsApp</strong> para confirmarmos o pedido</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-section">
+            <h2>🔄 Como Pagar com Millennium BIM</h2>
+            <ul class="steps-list">
+                <li>
+                    <span class="step-badge">1</span>
+                    <span class="step-text">Selecione o produto e preencha o formulário de checkout</span>
+                </li>
+                <li>
+                    <span class="step-badge">2</span>
+                    <span class="step-text">Escolha <strong>"Millennium BIM"</strong> como forma de pagamento</span>
+                </li>
+                <li>
+                    <span class="step-badge">3</span>
+                    <span class="step-text">Receberá o IBAN/NIB e o valor a transferir</span>
+                </li>
+                <li>
+                    <span class="step-badge">4</span>
+                    <span class="step-text">Faça a transferência via app mBIM ou internet banking</span>
+                </li>
+                <li>
+                    <span class="step-badge">5</span>
+                    <span class="step-text">Envie o comprovativo via <strong>WhatsApp</strong> para confirmarmos o pedido</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="security-box">
+            <h2>🔒 O Seu Pagamento é Seguro</h2>
+            <p>Todas as transações são processadas de forma segura. Nunca partilhe a sua PIN ou senha com ninguém.</p>
+            <div class="security-icons">
+                <div class="sec-item"><div class="icon">🔐</div><p>Dados Protegidos</p></div>
+                <div class="sec-item"><div class="icon">✅</div><p>Compra Garantida</p></div>
+                <div class="sec-item"><div class="icon">📱</div><p>Confirmação Imediata</p></div>
+                <div class="sec-item"><div class="icon">🤝</div><p>Suporte Dedicado</p></div>
+            </div>
+        </div>
+
+        <div class="notice-box">
+            <p>⚠️ <strong>Importante:</strong> Apenas aceitamos pagamentos para os números e contas oficiais que serão enviados após a sua encomenda. Em caso de dúvida, confirme sempre pelo nosso WhatsApp antes de efectuar qualquer pagamento.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 BazaraMz. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
