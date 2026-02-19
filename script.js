@@ -195,8 +195,9 @@ function viewProduct(productId) {
     localStorage.setItem('currentProductId', productId);
     
     document.getElementById('homePage').style.display = 'none';
-    document.getElementById('productPage').classList.add('active');
-    document.getElementById('checkoutPage').classList.remove('active');
+    // ✅ DEPOIS
+    document.getElementById('productPage').style.display = 'block';
+    document.getElementById('checkoutPage').style.display = 'none'; 
     document.getElementById('lojaPage').style.display = 'none';
     const firstImage = currentProduct.images[0];
     const mainImageContent = createImageContent(firstImage, currentProduct.name);
