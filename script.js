@@ -105,620 +105,11 @@ function renderProductsWithPagination() {
     addPaginationButtons();
 }
 // MongoDB Connection (exemplo, substitua pela sua string de conexão real)
-        // Banco de dados de produtos da página inicial (destaques)
-const homeProducts = [
-    {
-        "id": 1,
-        "name": "Playstation 5 Slim Disc Edition",
-        "price": 35474,
-        "category": "Electrônicos",
-        "description": "Console de última geração com leitor de disco, gráficos 4K nativos e SSD de 1TB para carregamento ultrarrápido.",
-        "fullDescription": "Experimente o poder da nova geração com o PlayStation 5 Slim Disc Edition. Design compacto com volume reduzido em mais de 30% e peso 18% menor. Gráficos nativos em 4K, SSD de 1TB para carregamento ultrarrápido e suporte a feedback tátil, gatilhos adaptáveis e áudio 3D para uma experiência de jogo imersiva.",
-        "emoji": "images/PlayStation 5 1.jpg",
-        "images": [
-            "images/PlayStation 5 1.jpg",
-            "images/PlayStation 5 2.jpg",
-            "images/PlayStation 5 3.jpg",
-            "images/PlayStation 5 4.jpg",
-            "images/PlayStation 5 5.jpg"
-        ],
-        "specs": [
-            "Modelo: Slim Disc Edition (Versão Internacional - Região Livre)",
-            "Armazenamento: 1TB SSD Ultra-Rápido",
-            "Resolução: Nativa 4K com suporte a HDR",
-            "Drive: Leitor de Blu-ray 4K UHD",
-            "Controle: DualSense com feedback tátil e gatilhos adaptáveis",
-            "Itens Inclusos: Console, Controle DualSense, Cabo USB, Cabo HDMI, Cabo AC"
-        ]
-    },
-    {
-        "id": 2,
-        "name": "PlayStation 5 Pro1",
-        "price": 52032,
-        "category": "Electrônicos",
-        "description": "Console de altíssimo desempenho com tecnologia AI-enhanced resolution, 2TB SSD e suporte a ray tracing avançado para uma experiência de jogo ultrarrealista.",
-        "fullDescription": "Experimente o próximo nível dos games com o PlayStation 5 Pro Digital Edition. Equipado com a tecnologia PSSR (PlayStation Spectral Super Resolution), que utiliza inteligência artificial para elevar a nitidez das imagens em TVs 4K. Aproveite ray tracing avançado para reflexos, sombras e iluminação global mais realistas, além de desempenho otimizado com taxas de quadros mais altas e consistentes em telas de 60Hz e 120Hz. Conectividade wireless de última geração com suporte a IEEE 802.11be para menor latência e maior estabilidade online.",
-        "emoji": "images/PlayStation 5 Pro1.jpg",
-        "images": [
-            "images/PlayStation 5 Pro1.jpg",
-            "images/PlayStation 5 Pro2.jpg",
-            "images/PlayStation 5 Pro3.jpg",
-            "images/PlayStation 5 Pro4.jpg",
-            "images/PlayStation 5 Pro5.jpg"
-        ],
-        "specs": [
-            "Modelo: PlayStation 5 Pro Digital Edition (Versão Internacional)",
-            "Armazenamento: 2TB SSD Ultra-Rápido",
-            "Resolução: 4K com PSSR (AI-enhanced resolution)",
-            "Drive: Compatível com leitor de Blu-ray 4K UHD (vendido separadamente)",
-            "Conectividade: Wi-Fi IEEE 802.11be (próxima geração)",
-            "Itens Inclusos: Console, Controle DualSense, Cabo USB, Cabo HDMI, Cabo AC"
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Controle DualSense PS5",
-        "price": 5412,
-        "category": "Electrônicos",
-        "description": "Controle sem fio com feedback tátil imersivo, gatilhos adaptáveis e microfone integrado. Disponível em várias cores.",
-        "fullDescription": "Sinta cada momento do jogo com o controle DualSense para PlayStation 5. Equipado com gatilhos adaptáveis que simulam a tensão de uma corda de arco ou a resistência dos freios de um carro, e feedback tátil dinâmico que substitui os motores de vibração tradicionais por atuadores duplos para experiências mais realistas. O microfone embutido permite conversar com amigos online, com botão dedicado para ativar/desativar a captura de voz. Design ergonômico e conexão sem fio.",
-        "emoji": "images/PlayStation DualSense Wireless Controller5.jpg",
-        "images": [
-            "images/PlayStation DualSense Wireless Controller5.jpg",
-            "images/PlayStation DualSense Wireless Controller1.jpg",
-            "images/PlayStation DualSense Wireless Controller2.jpg",
-            "images/PlayStation DualSense Wireless Controller3.jpg",
-            "images/PlayStation DualSense Wireless Controller4.jpg"
-        ],
-        "specs": [
-            "Cores disponíveis: Branco, Preto meia-noite, Camuflagem cinza,",
-            "Croma azul-petróleo, Chroma Indigo,",
-            "Azul-claro, Roxo galáctico",
-            "Tecnologia: Gatilhos adaptáveis e feedback tátil",
-            "Áudio: Microfone embutido e conector P2 (3,5mm) para headset",
-            "Conectividade: Sem fio (Bluetooth) / Cabo USB-C"
-        ]
-    },
-    {
-        "id": 4,
-        "name": " Reforço de Arranque",
-        "price": 3977,
-        "category": "",
-        "description": "Kit Automotivo 3 em 1, Chave de impacto sem fio, compressor de ar portátil e power pack de emergência com design compacto e alta performance.",
-        "fullDescription": "A solução completa para emergências automotivas e manutenção do dia a dia. Combinando uma chave de impacto potente, um compressor de ar digital e uma fonte de energia portátil para partida de veículos, tudo em um único dispositivo. Ideal para trocar pneus, calibrar pneus com precisão e ligar o carro em situações de bateria descarregada. Design robusto e fácil de transportar.",
-        "emoji": "images/Reforço de Arranque1.jpg",
-        "images": [
-            "images/Reforço de Arranque1.jpg",
-            "images/Reforço de Arranque2.jpg",
-            "images/Reforço de Arranque3.jpg",
-            "images/Reforço de Arranque4.jpg",
-            "images/Reforço de Arranque5.jpg"
-        ],
-        "specs": [
-            "Produto: BUWEI N1 – Inflador + Chave de Impacto + Power Pack",
-            "Chave de impacto: Torque potente para remoção de parafusos de rodas",
-            "Compressor: Inflagem digital com leitura em tempo real",
-            "Bateria interna: 25.0 (capacidade indicada para partida de emergência) 1000A",
-            "Voltagem compatível: 12V / 24V (veículos de passeio e pesados)",
-            "Itens inclusos: Unidade principal, cabos de partida, mangueira de ar, carregador"
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Smartphone",
-        "price": 2499.99,
-        "description": "Smartphone top de linha com câmera de 108MP e tela AMOLED",
-        "fullDescription": "Experimente o melhor da tecnologia com este smartphone premium. Câmera de 108MP para fotos incríveis, processador octa-core de última geração, 8GB de RAM e 256GB de armazenamento. Tela AMOLED de 6.7 polegadas com taxa de atualização de 120Hz.",
-        "emoji": "images/PlayStation 4 Slim.jpg",
-        "images": [
-            "images/PlayStation 4 Slim1.jpg",
-            "images/PlayStation 4 Slim2.jpg",
-            "images/PlayStation 4 Slim3.jpg",
-            "images/PlayStation 4 Standard 1.jpg",
-            "images/PlayStation 4 Standard 2.jpg"
-        ],
-        "specs": [
-            "Tela: 6.7\" AMOLED 120Hz",
-            "Câmera: 108MP + 12MP + 8MP",
-            "Processador: Snapdragon 8 Gen 2",
-            "RAM: 8GB",
-            "Armazenamento: 256GB",
-            "Bateria: 5000mAh"
-        ]
-    },
-    {
-        "id": 6,
-        "name": "Notebook Gamer",
-        "price": 4999.99,
-        "description": "Notebook potente para jogos com RTX 4060",
-        "fullDescription": "Domine seus jogos favoritos com este notebook gamer de alta performance. Equipado com placa de vídeo RTX 4060, processador Intel i7 de 13ª geração, 16GB de RAM DDR5 e SSD de 512GB NVMe. Tela Full HD de 15.6\" com 144Hz para jogabilidade suave.",
-        "emoji": "💻",
-        "images": [
-            "💻",
-            "🎮",
-            "⌨️",
-            "🖱️",
-            "🔊"
-        ],
-        "specs": [
-            "Processador: Intel i7-13700H",
-            "GPU: RTX 4060 8GB",
-            "RAM: 16GB DDR5",
-            "SSD: 512GB NVMe",
-            "Tela: 15.6\" Full HD 144Hz",
-            "Sistema: Windows 11"
-        ]
-    },
-    {
-        "id": 7,
-        "name": "Fone Bluetooth Premium",
-        "price": 599.99,
-        "description": "Fone de ouvido sem fio com cancelamento de ruído",
-        "fullDescription": "Mergulhe em seu mundo musical com cancelamento de ruído ativo de última geração. Áudio Hi-Fi, bateria de 30 horas, conexão Bluetooth 5.3 e design confortável para uso prolongado. Perfeito para trabalho, estudos e entretenimento.",
-        "emoji": "🎧",
-        "images": [
-            "🎧",
-            "🔊",
-            "🎵",
-            "🔋",
-            "📱"
-        ],
-        "specs": [
-            "Cancelamento de ruído ativo",
-            "Bateria: até 30 horas",
-            "Bluetooth 5.3",
-            "Driver: 40mm",
-            "Carregamento rápido USB-C",
-            "Compatível com assistente de voz"
-        ]
-    }
-];
 
-// Banco de dados de produtos da página Loja (completo)
-const lojaProducts = [
-    {
-        "id": 1,
-        "name": "Playstation 5 Slim Disc Edition",
-        "price": 35474,
-        "category": "Electrônicos",
-        "description": "Console de última geração com leitor de disco, gráficos 4K nativos e SSD de 1TB para carregamento ultrarrápido.",
-        "fullDescription": "Experimente o poder da nova geração com o PlayStation 5 Slim Disc Edition. Design compacto com volume reduzido em mais de 30% e peso 18% menor. Gráficos nativos em 4K, SSD de 1TB para carregamento ultrarrápido e suporte a feedback tátil, gatilhos adaptáveis e áudio 3D para uma experiência de jogo imersiva.",
-        "emoji": "images/PlayStation 5 1.jpg",
-        "images": [
-            "images/PlayStation 5 1.jpg",
-            "images/PlayStation 5 2.jpg",
-            "images/PlayStation 5 3.jpg",
-            "images/PlayStation 5 4.jpg",
-            "images/PlayStation 5 5.jpg"
-        ],
-        "specs": [
-            "Modelo: Slim Disc Edition (Versão Internacional - Região Livre)",
-            "Armazenamento: 1TB SSD Ultra-Rápido",
-            "Resolução: Nativa 4K com suporte a HDR",
-            "Drive: Leitor de Blu-ray 4K UHD",
-            "Controle: DualSense com feedback tátil e gatilhos adaptáveis",
-            "Itens Inclusos: Console, Controle DualSense, Cabo USB, Cabo HDMI, Cabo AC"
-        ]
-    },
-    {
-        "id": 2,
-        "name": "PlayStation 5 Pro1",
-        "price": 52032,
-        "category": "Electrônicos",
-        "description": "Console de altíssimo desempenho com tecnologia AI-enhanced resolution, 2TB SSD e suporte a ray tracing avançado para uma experiência de jogo ultrarrealista.",
-        "fullDescription": "Experimente o próximo nível dos games com o PlayStation 5 Pro Digital Edition. Equipado com a tecnologia PSSR (PlayStation Spectral Super Resolution), que utiliza inteligência artificial para elevar a nitidez das imagens em TVs 4K. Aproveite ray tracing avançado para reflexos, sombras e iluminação global mais realistas, além de desempenho otimizado com taxas de quadros mais altas e consistentes em telas de 60Hz e 120Hz. Conectividade wireless de última geração com suporte a IEEE 802.11be para menor latência e maior estabilidade online.",
-        "emoji": "images/PlayStation 5 Pro1.jpg",
-        "images": [
-            "images/PlayStation 5 Pro1.jpg",
-            "images/PlayStation 5 Pro2.jpg",
-            "images/PlayStation 5 Pro3.jpg",
-            "images/PlayStation 5 Pro4.jpg",
-            "images/PlayStation 5 Pro5.jpg"
-        ],
-        "specs": [
-            "Modelo: PlayStation 5 Pro Digital Edition (Versão Internacional)",
-            "Armazenamento: 2TB SSD Ultra-Rápido",
-            "Resolução: 4K com PSSR (AI-enhanced resolution)",
-            "Drive: Compatível com leitor de Blu-ray 4K UHD (vendido separadamente)",
-            "Conectividade: Wi-Fi IEEE 802.11be (próxima geração)",
-            "Itens Inclusos: Console, Controle DualSense, Cabo USB, Cabo HDMI, Cabo AC"
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Controle DualSense PS5",
-        "price": 5412,
-        "category": "Electrônicos",
-        "description": "Controle sem fio com feedback tátil imersivo, gatilhos adaptáveis e microfone integrado. Disponível em várias cores.",
-        "fullDescription": "Sinta cada momento do jogo com o controle DualSense para PlayStation 5. Equipado com gatilhos adaptáveis que simulam a tensão de uma corda de arco ou a resistência dos freios de um carro, e feedback tátil dinâmico que substitui os motores de vibração tradicionais por atuadores duplos para experiências mais realistas. O microfone embutido permite conversar com amigos online, com botão dedicado para ativar/desativar a captura de voz. Design ergonômico e conexão sem fio.",
-        "emoji": "images/PlayStation DualSense Wireless Controller5.jpg",
-        "images": [
-            "images/PlayStation DualSense Wireless Controller5.jpg",
-            "images/PlayStation DualSense Wireless Controller1.jpg",
-            "images/PlayStation DualSense Wireless Controller2.jpg",
-            "images/PlayStation DualSense Wireless Controller3.jpg",
-            "images/PlayStation DualSense Wireless Controller4.jpg"
-        ],
-        "specs": [
-            "Cores disponíveis: Branco, Preto meia-noite, Camuflagem cinza,",
-            "Croma azul-petróleo, Chroma Indigo,",
-            "Azul-claro, Roxo galáctico",
-            "Tecnologia: Gatilhos adaptáveis e feedback tátil",
-            "Áudio: Microfone embutido e conector P2 (3,5mm) para headset",
-            "Conectividade: Sem fio (Bluetooth) / Cabo USB-C"
-        ]
-    },
-    {
-        "id": 4,
-        "name": " Reforço de Arranque",
-        "price": 3977,
-        "category": "",
-        "description": "Kit Automotivo 3 em 1, Chave de impacto sem fio, compressor de ar portátil e power pack de emergência com design compacto e alta performance.",
-        "fullDescription": "A solução completa para emergências automotivas e manutenção do dia a dia. Combinando uma chave de impacto potente, um compressor de ar digital e uma fonte de energia portátil para partida de veículos, tudo em um único dispositivo. Ideal para trocar pneus, calibrar pneus com precisão e ligar o carro em situações de bateria descarregada. Design robusto e fácil de transportar.",
-        "emoji": "images/Reforço de Arranque1.jpg",
-        "images": [
-            "images/Reforço de Arranque1.jpg",
-            "images/Reforço de Arranque2.jpg",
-            "images/Reforço de Arranque3.jpg",
-            "images/Reforço de Arranque4.jpg",
-            "images/Reforço de Arranque5.jpg"
-        ],
-        "specs": [
-            "Produto: BUWEI N1 – Inflador + Chave de Impacto + Power Pack",
-            "Chave de impacto: Torque potente para remoção de parafusos de rodas",
-            "Compressor: Inflagem digital com leitura em tempo real",
-            "Bateria interna: 25.0 (capacidade indicada para partida de emergência) 1000A",
-            "Voltagem compatível: 12V / 24V (veículos de passeio e pesados)",
-            "Itens inclusos: Unidade principal, cabos de partida, mangueira de ar, carregador"
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Smartphone",
-        "price": 2499.99,
-        "description": "Smartphone top de linha com câmera de 108MP e tela AMOLED",
-        "fullDescription": "Experimente o melhor da tecnologia com este smartphone premium. Câmera de 108MP para fotos incríveis, processador octa-core de última geração, 8GB de RAM e 256GB de armazenamento. Tela AMOLED de 6.7 polegadas com taxa de atualização de 120Hz.",
-        "emoji": "images/PlayStation 4 Slim.jpg",
-        "images": [
-            "images/PlayStation 4 Slim1.jpg",
-            "images/PlayStation 4 Slim2.jpg",
-            "images/PlayStation 4 Slim3.jpg",
-            "images/PlayStation 4 Standard 1.jpg",
-            "images/PlayStation 4 Standard 2.jpg"
-        ],
-        "specs": [
-            "Tela: 6.7\" AMOLED 120Hz",
-            "Câmera: 108MP + 12MP + 8MP",
-            "Processador: Snapdragon 8 Gen 2",
-            "RAM: 8GB",
-            "Armazenamento: 256GB",
-            "Bateria: 5000mAh"
-        ]
-    },
-    {
-        "id": 6,
-        "name": "Notebook Gamer",
-        "price": 4999.99,
-        "description": "Notebook potente para jogos com RTX 4060",
-        "fullDescription": "Domine seus jogos favoritos com este notebook gamer de alta performance. Equipado com placa de vídeo RTX 4060, processador Intel i7 de 13ª geração, 16GB de RAM DDR5 e SSD de 512GB NVMe. Tela Full HD de 15.6\" com 144Hz para jogabilidade suave.",
-        "emoji": "💻",
-        "images": [
-            "💻",
-            "🎮",
-            "⌨️",
-            "🖱️",
-            "🔊"
-        ],
-        "specs": [
-            "Processador: Intel i7-13700H",
-            "GPU: RTX 4060 8GB",
-            "RAM: 16GB DDR5",
-            "SSD: 512GB NVMe",
-            "Tela: 15.6\" Full HD 144Hz",
-            "Sistema: Windows 11"
-        ]
-    },
-    {
-        "id": 7,
-        "name": "Fone Bluetooth Premium",
-        "price": 599.99,
-        "description": "Fone de ouvido sem fio com cancelamento de ruído",
-        "fullDescription": "Mergulhe em seu mundo musical com cancelamento de ruído ativo de última geração. Áudio Hi-Fi, bateria de 30 horas, conexão Bluetooth 5.3 e design confortável para uso prolongado. Perfeito para trabalho, estudos e entretenimento.",
-        "emoji": "🎧",
-        "images": [
-            "🎧",
-            "🔊",
-            "🎵",
-            "🔋",
-            "📱"
-        ],
-        "specs": [
-            "Cancelamento de ruído ativo",
-            "Bateria: até 30 horas",
-            "Bluetooth 5.3",
-            "Driver: 40mm",
-            "Carregamento rápido USB-C",
-            "Compatível com assistente de voz"
-        ]
-    },
-    {
-        "id": 8,
-        "name": "Smartwatch Fitness",
-        "price": 899.99,
-        "description": "Relógio inteligente com monitoramento de saúde",
-        "fullDescription": "Monitore sua saúde e fitness 24/7 com este smartwatch completo. Sensor de frequência cardíaca, oxímetro, monitor de sono, GPS integrado e mais de 100 modos esportivos. Tela AMOLED de 1.4\" sempre ligada e bateria que dura 14 dias.",
-        "emoji": "⌚",
-        "images": [
-            "⌚",
-            "❤️",
-            "🏃",
-            "💤",
-            "📊"
-        ],
-        "specs": [
-            "Tela: 1.4\" AMOLED",
-            "Bateria: até 14 dias",
-            "GPS integrado",
-            "Monitor cardíaco 24/7",
-            "Oxímetro de pulso",
-            "À prova d'água 5ATM"
-        ]
-    },
-    {
-        "id": 9,
-        "name": "Câmera DSLR Profissional",
-        "price": 3499.99,
-        "description": "Câmera profissional para fotografia e vídeo 4K",
-        "fullDescription": "Capture momentos perfeitos com qualidade profissional. Sensor full-frame de 24.2MP, gravação em 4K 60fps, autofoco ultra-rápido com 693 pontos, ISO até 51200 e tela touch articulada de 3.2 polegadas. Ideal para fotógrafos profissionais e entusiastas.",
-        "emoji": "📷",
-        "images": [
-            "📷",
-            "🎥",
-            "🌅",
-            "✨",
-            "💫"
-        ],
-        "specs": [
-            "Sensor: Full-frame 24.2MP",
-            "Vídeo: 4K 60fps",
-            "Autofoco: 693 pontos",
-            "ISO: 100-51200",
-            "Tela: 3.2\" touch articulada",
-            "Wi-Fi e Bluetooth integrados"
-        ]
-    },
-    {
-        "id": 10,
-        "name": "Console de Videogame",
-        "price": 2999.99,
-        "description": "Console de nova geração com gráficos 4K",
-        "fullDescription": "Entre na próxima geração de jogos com gráficos em 4K, ray tracing em tempo real e carregamento ultra-rápido com SSD. Jogue os maiores sucessos em resolução 4K a 120fps. Inclui controle sem fio de última geração com feedback háptico.",
-        "emoji": "🎮",
-        "images": [
-            "🎮",
-            "🕹️",
-            "📺",
-            "🎯",
-            "🏆"
-        ],
-        "specs": [
-            "Resolução: 4K 120fps",
-            "SSD: 825GB ultra-rápido",
-            "Ray Tracing em tempo real",
-            "Áudio 3D",
-            "Controle com feedback háptico",
-            "Retrocompatível"
-        ]
-    },
-    {
-        "id": 11,
-        "name": "Tablet Pro",
-        "price": 1899.99,
-        "description": "Tablet profissional com caneta stylus e teclado",
-        "fullDescription": "Produtividade máxima com este tablet profissional. Tela de 11 polegadas com resolução 2K, suporte para caneta stylus com 4096 níveis de pressão, teclado detachable e bateria de 10 horas. Perfeito para trabalho criativo e negócios.",
-        "emoji": "📱",
-        "images": [
-            "📱",
-            "✏️",
-            "⌨️",
-            "🖥️",
-            "🔋"
-        ],
-        "specs": [
-            "Tela: 11\" 2K 120Hz",
-            "Processador: Snapdragon 8+ Gen 1",
-            "RAM: 8GB",
-            "Armazenamento: 256GB",
-            "Caneta: 4096 níveis de pressão",
-            "Bateria: 10 horas"
-        ]
-    },
-    {
-        "id": 812,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 13,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 14,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 15,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 16,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 17,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 18,
-        "name": "Caixa de Som Bluetooth",
-        "price": 399.99,
-        "description": "Caixa de som portátil com som 360° e luzes LED",
-        "fullDescription": "Festa em qualquer lugar com esta caixa de som potente. Som 360° com graves profundos, luzes LED sincronizadas com a música, bateria de 20 horas, resistência à água IPX7 e conectividade Bluetooth 5.0.",
-        "emoji": "🔊",
-        "images": [
-            "🔊",
-            "🎵",
-            "💡",
-            "🌊",
-            "🔋"
-        ],
-        "specs": [
-            "Potência: 30W RMS",
-            "Som: 360° surround",
-            "Bateria: 20 horas",
-            "Resistência: IPX7",
-            "Bluetooth: 5.0",
-            "Luzes: LED RGB sincronizadas"
-        ]
-    },
-    {
-        "id": 19,
-        "name": "Monitor Gamer Curvo",
-        "price": 2299.99,
-        "category": "",
-        "description": "Monitor curvo 27\" com 144Hz e 1ms de resposta",
-        "fullDescription": "Imersão total nos jogos com este monitor curvo ultra-wide. Tela de 27 polegadas com curvatura 1500R, taxa de atualização de 144Hz, tempo de resposta de 1ms, HDR10 e suporte FreeSync para jogos sem falhas.",
-        "emoji": "🖥️",
-        "images": [
-            "🖥️",
-            "🎮",
-            "⚡",
-            "🌈",
-            "🎯"
-        ],
-        "specs": [
-            "Tela: 27\" curva 1500R",
-            "Resolução: 2560x1440 QHD",
-            "Taxa: 144Hz",
-            "Resposta: 1ms",
-            "HDR: HDR10",
-            "Sync: FreeSync Premium"
-        ]
-    }
-];
+        // Produtos carregados da API (MongoDB)
+// Estes arrays são preenchidos dinamicamente ao carregar a página
+let homeProducts = [];
+const lojaProducts = [];;
 
 let currentProduct = null;
 const products = [...lojaProducts];
@@ -729,6 +120,50 @@ function createImageContent(source, altText) {
         return `<img src="${source}" alt="${altText}">`;
     } else {
         return source || '🎁';
+    }
+}
+
+// ==================== CARREGAR PRODUTOS DA API ====================
+const _API = window.location.hostname === 'localhost'
+    ? 'http://localhost:8888/.netlify/functions'
+    : `${window.location.origin}/.netlify/functions`;
+
+async function loadProductsFromAPI() {
+    try {
+        const res = await fetch(`${_API}/get-products`);
+        const data = await res.json();
+        const products = data.products || [];
+
+        // Limpar arrays
+        homeProducts.length = 0;
+        lojaProducts.length = 0;
+
+        products.forEach(p => {
+            const product = {
+                id: p._id,           // usa _id do MongoDB
+                _id: p._id,
+                name: p.name,
+                price: parseFloat(p.price) || 0,
+                category: p.category || 'Geral',
+                description: p.description || '',
+                fullDescription: p.fullDescription || '',
+                emoji: p.image || p.emoji || '📦',
+                images: p.images && p.images.length > 0 ? p.images : [p.image || p.emoji || '📦'],
+                specs: p.specs || []
+            };
+            lojaProducts.push(product);
+            homeProducts.push(product);
+        });
+
+        renderProducts();
+        if (document.getElementById('lojaPage')?.style.display === 'block') {
+            renderLojaProducts();
+        }
+    } catch (err) {
+        console.error('Erro ao carregar produtos:', err);
+        // Fallback: mostra mensagem amigável
+        const grid = document.getElementById('productsGrid');
+        if (grid) grid.innerHTML = '<p style="text-align:center; color:white; padding:40px;">⏳ A carregar produtos...</p>';
     }
 }
 
@@ -753,7 +188,7 @@ function renderProducts() {
 }
 
 function viewProduct(productId) {
-    currentProduct = lojaProducts.find(p => p.id === productId);
+    currentProduct = lojaProducts.find(p => p.id === productId || p._id === productId || p.id == productId);
     if (!currentProduct) {alert('Produto não encontrado!'); return;}
     
     // Salvar ID do produto atual no localStorage
@@ -1059,6 +494,7 @@ function showLoja() {
     document.getElementById('productPage').classList.remove('active');
     document.getElementById('checkoutPage').classList.remove('active');
     document.getElementById('lojaPage').style.display = 'block';
+    if (lojaProducts.length === 0) { loadProductsFromAPI(); return; }
     renderLojaProducts();
     window.scrollTo(0, 0);
 }
@@ -1785,6 +1221,6 @@ function showAccountPage() {
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar menu da conta
     updateAccountMenu();
-    // Login/registro agora é tratado por auth-integration.js (Netlify Functions)
-    renderProducts();
+    // Carregar produtos do MongoDB via API
+    loadProductsFromAPI();
 });
