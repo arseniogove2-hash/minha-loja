@@ -6,13 +6,14 @@
     <meta name="description" content="Loja online em Moçambique com os melhores produtos eletrônicos e mais!">
     <meta name="keywords" content="loja online, Moçambique, eletrônicos, PlayStation">
     <meta name="author" content="BazaraMz">
+    <meta name="google-adsense-account" content="ca-pub-7044790527221807">
     
     <!-- Open Graph para redes sociais -->
     <meta property="og:title" content="BazaraMz - Produtos Incríveis">
     <meta property="og:description" content="Sua loja online de confiança">
     <meta property="og:image" content="url-da-logo">
     <meta property="og:url" content="seu-site.com">
-    <title>BazaraMz - Produtos Incríveis</title>
+    <title>🛍️ BazaraMz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,12 +41,261 @@
 
     <!-- Container Principal -->
     <main class="container">
-        <!-- Home Page -->
-        <section id="homePage" class="page">
-            <h1 class="page-title">Produtos em Destaque</h1>
-            <div class="products-grid" id="productsGrid">
-                <!-- Os produtos serão adicionados aqui dinamicamente -->
+        <!-- Home Page - LANDING PAGE -->
+        <section id="homePage" class="page" style="display:block;">
+
+            <!-- HERO SECTION -->
+            <div class="lp-hero">
+                <div class="lp-hero-bg">
+                    <div class="lp-orb lp-orb-1"></div>
+                    <div class="lp-orb lp-orb-2"></div>
+                    <div class="lp-orb lp-orb-3"></div>
+                    <div class="lp-grid-overlay"></div>
+                </div>
+                <div class="lp-hero-content">
+                    <div class="lp-badge">🇲🇿 Nº1 em Moçambique</div>
+                    <h1 class="lp-hero-title">
+                        Tecnologia que<br>
+                        <span class="lp-gradient-text">transforma</span><br>
+                        a tua vida
+                    </h1>
+                    <p class="lp-hero-sub">Gadgets, electrónicos e ferramentas de trabalho com entrega rápida em Maputo e arredores.</p>
+                    <div class="lp-hero-actions">
+                        <button class="lp-btn-primary" onclick="showLoja()">
+                            <span>Ver Produtos</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                        <button class="lp-btn-ghost" onclick="document.getElementById('lp-features').scrollIntoView({behavior:'smooth'})">
+                            Saber Mais ↓
+                        </button>
+                    </div>
+                    <div class="lp-hero-stats">
+                        <div class="lp-stat">
+                            <span class="lp-stat-num">50+</span>
+                            <span class="lp-stat-label">Produtos</span>
+                        </div>
+                        <div class="lp-stat-divider"></div>
+                        <div class="lp-stat">
+                            <span class="lp-stat-num">200+</span>
+                            <span class="lp-stat-label">Clientes</span>
+                        </div>
+                        <div class="lp-stat-divider"></div>
+                        <div class="lp-stat">
+                            <span class="lp-stat-num">4.9★</span>
+                            <span class="lp-stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lp-hero-visual">
+                    <div class="lp-device-showcase">
+                        <div class="lp-device lp-device-main">
+                            <div class="lp-device-screen">
+                                <div class="lp-device-emoji">🎮</div>
+                                <div class="lp-device-tag">PlayStation 5</div>
+                            </div>
+                        </div>
+                        <div class="lp-device lp-device-sm lp-device-tl">
+                            <div class="lp-device-screen">
+                                <div class="lp-device-emoji">🔧</div>
+                                <div class="lp-device-tag">Ferramentas</div>
+                            </div>
+                        </div>
+                        <div class="lp-device lp-device-sm lp-device-br">
+                            <div class="lp-device-screen">
+                                <div class="lp-device-emoji">💻</div>
+                                <div class="lp-device-tag">Laptop</div>
+                            </div>
+                        </div>
+                        <div class="lp-floating-badge lp-fb-1">✅ Entrega Rápida</div>
+                        <div class="lp-floating-badge lp-fb-2">🔒 Pagamento Seguro</div>
+                    </div>
+                </div>
             </div>
+
+            <!-- FEATURES / PORQUÊ NÓS -->
+            <div class="lp-features" id="lp-features">
+                <div class="lp-section-header">
+                    <span class="lp-section-tag">Porque escolher-nos</span>
+                    <h2>Comprar na BazaraMz é <span class="lp-gradient-text">diferente</span></h2>
+                </div>
+                <div class="lp-features-grid">
+                    <div class="lp-feature-card">
+                        <div class="lp-feature-icon">⚡</div>
+                        <h3>Hoje pedes, amanhã tens</h3>
+                        <p>Recebe os teus produtos em Maputo. Rápido e seguro.</p>
+                    </div>
+                    <div class="lp-feature-card lp-feature-highlight">
+                        <div class="lp-feature-icon">🛡️</div>
+                        <h3>Garantia real, produto real</h3>
+                        <p>Compramos apenas de fornecedores certificados. A tua paz de espírito é a nossa prioridade..</p>
+                    </div>
+                    <div class="lp-feature-card">
+                        <div class="lp-feature-icon">💳</div>
+                        <h3>M-Pesa & Cartão</h3>
+                        <p>Paga como preferires — M-Pesa, cartão de crédito ou débito. Simples e seguro.</p>
+                    </div>
+                    <div class="lp-feature-card">
+                        <div class="lp-feature-icon">🎯</div>
+                        <h3>Suporte 7 dias</h3>
+                        <p>A nossa equipa está disponível todos os dias para te ajudar antes e depois da compra.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORIAS EM DESTAQUE -->
+            <div class="lp-categories">
+                <div class="lp-section-header">
+                    <span class="lp-section-tag">O que temos</span>
+                    <h2>Categorias em <span class="lp-gradient-text">Destaque</span></h2>
+                </div>
+                <div class="lp-categories-grid">
+                    <div class="lp-cat-card lp-cat-gaming" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">🎮</div>
+                        <h3>Gaming</h3>
+                        <p>PS5, Xbox, Acessórios</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                    <div class="lp-cat-card lp-cat-mobile" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">📱</div>
+                        <h3>Telemóveis</h3>
+                        <p>Smartphones, Tablets</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                    <div class="lp-cat-card lp-cat-laptop" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">💻</div>
+                        <h3>Computadores</h3>
+                        <p>Laptops, Desktops</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                    <div class="lp-cat-card lp-cat-tools" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">🔧</div>
+                        <h3>Ferramentas</h3>
+                        <p>Trabalho & Produtividade</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                    <div class="lp-cat-card lp-cat-audio" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">🎧</div>
+                        <h3>Áudio</h3>
+                        <p>Headphones, Colunas</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                    <div class="lp-cat-card lp-cat-more" onclick="showLoja()">
+                        <div class="lp-cat-bg"></div>
+                        <div class="lp-cat-icon">✨</div>
+                        <h3>E muito mais</h3>
+                        <p>Explorar toda a loja</p>
+                        <span class="lp-cat-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIDEO SHOWCASE -->
+            <div class="lp-video-section">
+                <div class="lp-section-header">
+                    <span class="lp-section-tag">Ver para crer</span>
+                    <h2>Os nossos <span class="lp-gradient-text">produtos em acção</span></h2>
+                </div>
+                <div class="lp-video-grid">
+                    <div class="lp-video-main">
+                        <div class="lp-video-placeholder lp-video-lg">
+                            <div class="lp-video-overlay">
+                                <button class="lp-play-btn">▶</button>
+                                <div class="lp-video-info">
+                                    <span class="lp-video-tag">🎮 Gaming</span>
+                                    <p>PS5 — A experiência definitiva</p>
+                                </div>
+                            </div>
+                            <div class="lp-video-thumb">🎮</div>
+                        </div>
+                    </div>
+                    <div class="lp-video-side">
+                        <div class="lp-video-placeholder lp-video-sm">
+                            <div class="lp-video-overlay">
+                                <button class="lp-play-btn lp-play-sm">▶</button>
+                                <div class="lp-video-info">
+                                    <span class="lp-video-tag">📱 Móvel</span>
+                                    <p>Smartphones de última geração</p>
+                                </div>
+                            </div>
+                            <div class="lp-video-thumb">📱</div>
+                        </div>
+                        <div class="lp-video-placeholder lp-video-sm">
+                            <div class="lp-video-overlay">
+                                <button class="lp-play-btn lp-play-sm">▶</button>
+                                <div class="lp-video-info">
+                                    <span class="lp-video-tag">💻 Work</span>
+                                    <p>Laptops para profissionais</p>
+                                </div>
+                            </div>
+                            <div class="lp-video-thumb">💻</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TESTEMUNHOS -->
+            <div class="lp-testimonials">
+                <div class="lp-section-header">
+                    <span class="lp-section-tag">O que dizem</span>
+                    <h2>Clientes <span class="lp-gradient-text">satisfeitos</span></h2>
+                </div>
+                <div class="lp-testimonials-grid">
+                    <div class="lp-testimonial-card">
+                        <div class="lp-t-stars">★★★★★</div>
+                        <p>"Comprei um PS5 e depois de 10 dias chegou em perfeitas condições. Serviço excelente!"</p>
+                        <div class="lp-t-author">
+                            <div class="lp-t-avatar">A</div>
+                            <div>
+                                <strong>André M.</strong>
+                                <span>Maputo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lp-testimonial-card lp-t-featured">
+                        <div class="lp-t-stars">★★★★★</div>
+                        <p>"Finalmente uma loja online em Moçambique que funciona mesmo. Produtos originais e entrega rápida."</p>
+                        <div class="lp-t-author">
+                            <div class="lp-t-avatar">F</div>
+                            <div>
+                                <strong>Fátima C.</strong>
+                                <span>Matola</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lp-testimonial-card">
+                        <div class="lp-t-stars">★★★★★</div>
+                        <p>"O M-Pesa facilita tudo. Paguei em segundos e o laptop chegou perfeito. Recomendo!"</p>
+                        <div class="lp-t-author">
+                            <div class="lp-t-avatar">J</div>
+                            <div>
+                                <strong>João S.</strong>
+                                <span>Beira</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA FINAL -->
+            <div class="lp-cta">
+                <div class="lp-cta-bg">
+                    <div class="lp-cta-orb"></div>
+                </div>
+                <div class="lp-cta-content">
+                    <h2>Pronto para começar<br>a <span class="lp-gradient-text">comprar?</span></h2>
+                    <p>Junta-te a mais de 2000 clientes satisfeitos em Moçambique.</p>
+                    <button class="lp-btn-primary lp-btn-xl" onclick="showLoja()">
+                        <span>Ver Todos os Produtos</span>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+
         </section>
 
         <!-- Página de Produto Individual -->
