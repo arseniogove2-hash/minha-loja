@@ -180,7 +180,7 @@ function renderProducts() {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
             </div>
         `;
         grid.appendChild(card);
@@ -188,7 +188,7 @@ function renderProducts() {
 }
 
 function viewProduct(productId) {
-    currentProduct = lojaProducts.find(p => String(p.id) === String(productId) || String(p._id) === String(productId));
+    currentProduct = lojaProducts.find(p => p.id === productId || p._id === productId || p.id == productId);
     if (!currentProduct) {alert('Produto não encontrado!'); return;}
     
     // Salvar ID do produto atual no localStorage
@@ -239,8 +239,8 @@ function goToCheckout() {
     }
     
     // Se estiver logado, prosseguir com checkout normal
-    document.getElementById('productPage').classList.remove('active');
-    document.getElementById('checkoutPage').classList.add('active');
+    document.getElementById('productPage').style.display = 'none';
+    document.getElementById('checkoutPage').style.display = 'block';
     
     document.getElementById('checkoutProductName').textContent = currentProduct.name;
     document.getElementById('checkoutProductPrice').textContent = `MZN ${currentProduct.price.toFixed(2).replace('.', ',')}`;
@@ -252,14 +252,14 @@ function goToCheckout() {
 }
 
 function backToProduct() {
-    document.getElementById('checkoutPage').classList.remove('active');
-    document.getElementById('productPage').classList.add('active');
+    document.getElementById('checkoutPage').style.display = 'none';
+    document.getElementById('productPage').style.display = 'block';
 }
 
 function showHome() {
     document.getElementById('homePage').style.display = 'block';
-    document.getElementById('productPage').classList.remove('active');
-    document.getElementById('checkoutPage').classList.remove('active');
+    document.getElementById('productPage').style.display = 'none';
+    document.getElementById('checkoutPage').style.display = 'none';
     document.getElementById('lojaPage').style.display = 'none';
     window.scrollTo(0, 0);
 }
@@ -492,8 +492,8 @@ function showOrderConfirmation(order) {
 
 function showLoja() {
     document.getElementById('homePage').style.display = 'none';
-    document.getElementById('productPage').classList.remove('active');
-    document.getElementById('checkoutPage').classList.remove('active');
+    document.getElementById('productPage').style.display = 'none';
+    document.getElementById('checkoutPage').style.display = 'none';
     document.getElementById('lojaPage').style.display = 'block';
     if (lojaProducts.length === 0) { loadProductsFromAPI(); return; }
     renderLojaProducts();
@@ -513,7 +513,7 @@ function renderLojaProducts() {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
             </div>
         `;
         lojaGrid.appendChild(card);
@@ -547,8 +547,8 @@ function updateAccountMenu() {
 function showAccount() {
     // Esconder todas as páginas
     document.getElementById('homePage').style.display = 'none';
-    document.getElementById('productPage').classList.remove('active');
-    document.getElementById('checkoutPage').classList.remove('active');
+    document.getElementById('productPage').style.display = 'none';
+    document.getElementById('checkoutPage').style.display = 'none';
     document.getElementById('lojaPage').style.display = 'none';
     
     // Mostrar página de conta
@@ -1154,7 +1154,7 @@ function showSearchResults(results, searchTerm) {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
             </div>
         `;
         lojaGrid.appendChild(card);
