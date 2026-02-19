@@ -180,7 +180,7 @@ function renderProducts() {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
             </div>
         `;
         grid.appendChild(card);
@@ -188,7 +188,7 @@ function renderProducts() {
 }
 
 function viewProduct(productId) {
-    currentProduct = lojaProducts.find(p => p.id === productId || p._id === productId || p.id == productId);
+    currentProduct = lojaProducts.find(p => String(p.id) === String(productId) || String(p._id) === String(productId));
     if (!currentProduct) {alert('Produto não encontrado!'); return;}
     
     // Salvar ID do produto atual no localStorage
@@ -513,7 +513,7 @@ function renderLojaProducts() {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
             </div>
         `;
         lojaGrid.appendChild(card);
@@ -1154,7 +1154,7 @@ function showSearchResults(results, searchTerm) {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">MZN ${product.price.toFixed(2).replace('.', ',')}</div>
                 <div class="product-description">${product.description}</div>
-                <button class="btn-view" onclick="viewProduct(${product.id})">Ver Detalhes</button>
+                <button class="btn-view" onclick="viewProduct('${product.id}')">Ver Detalhes</button>
             </div>
         `;
         lojaGrid.appendChild(card);
