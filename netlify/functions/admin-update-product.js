@@ -48,6 +48,7 @@ exports.handler = async (event, context) => {
       category: updateData.category || '',
       emoji: updateData.emoji || updateData.image,
       image: updateData.image || updateData.emoji,
+      images: updateData.images && updateData.images.length > 0 ? updateData.images : [updateData.image || updateData.emoji],
       description: updateData.description || '',
       fullDescription: updateData.fullDescription || '',
       specs: updateData.specs || [],
