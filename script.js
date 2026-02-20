@@ -393,7 +393,7 @@ function generateOrderNumber() {
 
 // Função para enviar mensagem ao WhatsApp
 function sendWhatsAppMessage(order, product) {
-    const whatsappNumber = '258840000000'; // ALTERE AQUI PARA SEU NÚMERO!
+    const whatsappNumber = '8617326114206'; // ALTERE AQUI PARA SEU NÚMERO!
     
     const message = `
 🛍️ *NOVO PEDIDO RECEBIDO*
