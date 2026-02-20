@@ -112,7 +112,8 @@ let homeProducts = [];
 const lojaProducts = [];;
 
 let currentProduct = null;
-const products = [...lojaProducts];
+// products aponta sempre para lojaProducts (preenchido pela API)
+const products = lojaProducts;
 
 function createImageContent(source, altText) {
     const isImage = source && (source.includes('.jpg') || source.includes('.png') || source.includes('.jpeg') || source.includes('.webp') || source.includes('.gif'));
@@ -393,7 +394,7 @@ function generateOrderNumber() {
 
 // Função para enviar mensagem ao WhatsApp
 function sendWhatsAppMessage(order, product) {
-    const whatsappNumber = '8617326114206'; // ALTERE AQUI PARA SEU NÚMERO!
+    const whatsappNumber = '258840000000'; // ALTERE AQUI PARA SEU NÚMERO!
     
     const message = `
 🛍️ *NOVO PEDIDO RECEBIDO*
@@ -1121,15 +1122,50 @@ function searchProducts(event) {
 
 function performSearch() {
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
-    if (searchTerm === '') {alert('Por favor, digite algo para pesquisar.'); return;}
-    const searchResults = products.filter(product => 
+    if (searchTerm === '') { alert('Por favor, digite algo para pesquisar.'); return; }
+
+    const searchResults = lojaProducts.filter(product =>
         product.name.toLowerCase().includes(searchTerm) ||
         product.description.toLowerCase().includes(searchTerm) ||
-        product.fullDescription.toLowerCase().includes(searchTerm) ||
-        product.specs.some(spec => spec.toLowerCase().includes(searchTerm))
+        (product.fullDescription || '').toLowerCase().includes(searchTerm) ||
+        (product.specs || []).some(spec => spec.toLowerCase().includes(searchTerm))
     );
-    if (searchResults.length === 0) {alert(`Nenhum produto encontrado para "${searchTerm}".`); return;}
+
+    if (searchResults.length === 0) {
+        showNoResults(searchTerm);
+        return;
+    }
     showSearchResults(searchResults, searchTerm);
+}
+
+function showNoResults(searchTerm) {
+    showLoja();
+    const lojaGrid = document.getElementById('lojaGrid');
+    lojaGrid.innerHTML = '';
+
+    const whatsappNumber = '258840000000';
+    const message = encodeURIComponent(
+        `Olá! Procuro o produto: "${searchTerm}". Têm disponível?`
+    );
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+    const div = document.createElement('div');
+    div.className = 'no-results-container';
+    div.innerHTML = `
+        <div class="no-results-box">
+            <div class="no-results-icon">🔍</div>
+            <h2>Produto não encontrado</h2>
+            <p>Não encontrámos resultados para <strong>"${searchTerm}"</strong>.</p>
+            <p>Mas não desanimes! Podes fazer o pedido diretamente pelo WhatsApp e vemos se conseguimos encontrar para ti.</p>
+            <a href="${whatsappUrl}" target="_blank" class="btn-whatsapp">
+                💬 Pedir pelo WhatsApp
+            </a>
+            <button class="btn-clear-search" onclick="clearSearch()" style="margin-top:12px;">
+                ← Voltar à Loja
+            </button>
+        </div>
+    `;
+    lojaGrid.appendChild(div);
 }
 
 function showSearchResults(results, searchTerm) {
