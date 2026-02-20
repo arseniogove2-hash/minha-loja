@@ -106,10 +106,54 @@ async function loadDashboard() {
         document.getElementById('total-revenue').textContent = `MZN ${Number(data.totalRevenue).toFixed(2)}`;
 
         await loadRecentOrders();
+        await loadTopProducts();
 
     } catch (error) {
         console.error('Erro ao carregar dashboard:', error);
         showToast('Erro ao carregar dados do dashboard', 'error');
+    }
+}
+
+async function loadTopProducts() {
+    try {
+        const response = await fetch(`${API_URL}/get-products`);
+        const data = await response.json();
+        const products = (data.products || []);
+
+        const container = document.getElementById('top-products-list');
+        if (products.length === 0) {
+            container.innerHTML = '<p style="padding:15px; color:#718096;">Nenhum produto ainda.</p>';
+            return;
+        }
+
+        // Ordenar por clicks (se existir) ou mostrar os primeiros 5
+        const sorted = [...products]
+            .sort((a, b) => (b.clicks || 0) - (a.clicks || 0))
+            .slice(0, 5);
+
+        container.innerHTML = sorted.map((p, i) => {
+            const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+            const imgSrc = p.image || '';
+            const isUrl = imgSrc.startsWith('http') || imgSrc.includes('/');
+            const imgHtml = isUrl
+                ? `<img src="${escapeHtml(imgSrc)}" style="width:45px;height:45px;object-fit:cover;border-radius:8px;">`
+                : `<span style="font-size:32px;">${imgSrc || '📦'}</span>`;
+            return `
+                <div class="activity-item">
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <span style="font-size:22px;">${medals[i]}</span>
+                        ${imgHtml}
+                        <div>
+                            <h4 style="color:#2d3748;">${escapeHtml(p.name)}</h4>
+                            <p style="color:#718096; font-size:13px;">MZN ${Number(p.price||0).toFixed(2)} · ${p.clicks || 0} cliques</p>
+                        </div>
+                    </div>
+                    <span style="font-size:20px; color:#667eea; font-weight:bold;">${p.clicks || 0}</span>
+                </div>`;
+        }).join('');
+
+    } catch (error) {
+        console.error('Erro ao carregar top produtos:', error);
     }
 }
 
@@ -365,6 +409,7 @@ async function editProduct(productId) {
         document.getElementById('product-description').value = product.description || '';
         document.getElementById('product-full-description').value = product.fullDescription || '';
         document.getElementById('product-specs').value = (product.specs || []).join('\n');
+        document.getElementById('product-images').value = (product.images || []).join('\n');
 
         openModal('product-modal');
 
@@ -408,6 +453,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const imgValue = document.getElementById('product-image').value;
 
+        const images = document.getElementById('product-images').value
+            .split('\n')
+            .map(s => s.trim())
+            .filter(s => s !== '');
+
         const productData = {
             productId: currentProductId,
             name: document.getElementById('product-name').value,
@@ -415,6 +465,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             category: document.getElementById('product-category').value,
             image: imgValue,
             emoji: imgValue,
+            images: images.length > 0 ? images : [imgValue],
             description: document.getElementById('product-description').value,
             fullDescription: document.getElementById('product-full-description').value,
             specs: specs
