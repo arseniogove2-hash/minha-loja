@@ -158,6 +158,7 @@ async function loadProductsFromAPI() {
 
         renderProducts();
         if (document.getElementById('lojaPage')?.style.display === 'block') {
+            buildCategoryBar();
             renderLojaProducts();
         }
     } catch (err) {
@@ -497,14 +498,25 @@ function showLoja() {
     document.getElementById('checkoutPage').style.display = 'none';
     document.getElementById('lojaPage').style.display = 'block';
     if (lojaProducts.length === 0) { loadProductsFromAPI(); return; }
+    currentCategory = 'Todos';
+    buildCategoryBar();
     renderLojaProducts();
     window.scrollTo(0, 0);
 }
 
-function renderLojaProducts() {
+let currentCategory = 'Todos';
+
+function renderLojaProducts(productsToRender) {
     const lojaGrid = document.getElementById('lojaGrid');
     lojaGrid.innerHTML = '';
-    lojaProducts.forEach(product => {
+    const list = productsToRender || lojaProducts;
+
+    if (list.length === 0) {
+        lojaGrid.innerHTML = '<p style="text-align:center;color:white;padding:40px;">Nenhum produto nesta categoria.</p>';
+        return;
+    }
+
+    list.forEach(product => {
         const card = document.createElement('div');
         card.className = 'product-card';
         const imageContent = createImageContent(product.emoji, product.name);
@@ -519,6 +531,33 @@ function renderLojaProducts() {
         `;
         lojaGrid.appendChild(card);
     });
+}
+
+function buildCategoryBar() {
+    const bar = document.getElementById('categoryBar');
+    if (!bar) return;
+
+    // Categorias únicas dos produtos
+    const cats = ['Todos', ...new Set(lojaProducts.map(p => p.category || 'Geral').filter(Boolean))];
+
+    // Emojis por categoria
+    const icons = { 'Todos':'🏷️', 'Electrónicos':'📱', 'Eletrônicos':'📱', 'Automóvel':'🚗', 'Ferramentas':'🔧', 'Games':'🎮', 'Geral':'📦' };
+
+    bar.innerHTML = cats.map(cat => `
+        <button class="cat-btn ${cat === currentCategory ? 'active' : ''}" onclick="filterByCategory('${cat}')">
+            ${icons[cat] || '📦'} ${cat}
+        </button>
+    `).join('');
+}
+
+function filterByCategory(category) {
+    currentCategory = category;
+    // Atualizar botão ativo
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    const filtered = category === 'Todos' ? lojaProducts : lojaProducts.filter(p => (p.category || 'Geral') === category);
+    renderLojaProducts(filtered);
 }
 
 // Funções da Página de Conta
